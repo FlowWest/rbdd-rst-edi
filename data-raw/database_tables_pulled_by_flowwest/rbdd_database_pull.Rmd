@@ -1,0 +1,142 @@
+---
+title: "Red Bluff Diversion Dam Database Data Pull"
+output: html_document
+date: "2022-09-02"
+---
+
+This document queries the RBDD database provided by Bill Poytress to extract
+RST data for the upper sac Red Bluff Diversion Dam RST. 
+
+If this file doesn't run, make sure operating system is being set correctly. 
+Depending on the operating system this script will run either the query_rbdd_database
+'4pc' or '4mac'
+
+
+```{r, include = F}
+library(tidyverse)
+library(knitr)
+library(lubridate)
+library(googleCloudStorageR)
+library(Hmisc)
+root.dir <- rprojroot::find_rstudio_root_file()
+knitr::opts_knit$set(root.dir)
+```
+
+
+# Pull in Access tables (see pull data script)
+
+
+# Trap
+```{r}
+trap_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/trap_access_post_2012.csv")
+trap_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/trap_access_pre_2012.csv")
+
+# TODO followup on the following for trap 
+# TODO need lookup for gear condition - reach out to bill used my best guess
+# TODO figure out whtat is going on with stations vs sites 
+# TODO check on diel = do we need if we have time? What are the C or unlettered values stand for 
+# TODO how does sample weighting work - it sounds like this is all based on total hours sampled in sample period is this correct. Should catch be scaled according to this sample weight
+trap_visit <- bind_rows(trap_pre_2012, trap_post_2012) |> 
+  mutate(site = "red bluff",
+         fish_properly = ifelse(fish_properly == "Y", TRUE, FALSE),
+         weather = case_when(weather_code == "CLD" ~ "cloudy", 
+                             weather_code == "CLR" ~ "clear", 
+                             weather_code == "FOG" ~ "foggy", 
+                             weather_code == "RAN" ~ "rainy", 
+                             weather_code == "W" ~ "windy"),
+         gear_condition = case_when(tolower(gear_condition) == "n" ~ "normal", 
+                                   tolower(gear_condition) == "pb" ~ "partial block",
+                                   tolower(gear_condition) == "tb" ~ "total block",
+                                   tolower(gear_condition) %in% c("n/p", "nr") ~ "not recorded",)) |> 
+  select(-weather_code) |> glimpse()
+
+table(trap_visit$subsite)
+table(trap_visit$trap_sample_type)
+table(trap_visit$diel)
+# Save data to google cloud
+write_csv(trap_visit, "data-raw/database_tables_pulled_by_flowwest/rbdd_trap_raw_combined.csv")
+```
+
+# Catch
+```{r}
+catch_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/catch_access_post_2012.csv")
+catch_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/catch_access_pre_2012.csv")
+
+# TODO followup on the following for catch
+# TODO mark_code = Ad_pelvic - is this important? 
+# TODO confirm catch is added across traps 
+catch <- bind_rows(catch_pre_2012, catch_post_2012) |> 
+  mutate(site = "red bluff",
+         dead = ifelse(tolower(dead) == "yes", TRUE, FALSE),
+         run = case_when(run == "F" ~ "fall run", 
+                         run == "L" ~ "late fall run", 
+                         run == "S" ~ "spring run", 
+                         run == "W" ~ "winter run",
+                         run == "n/p" ~ "not recorded"),
+         adipose_clipped = ifelse(mark_code == "Adclipped", TRUE, FALSE),
+         weight = ifelse(weight == 0, NA, weight),
+         fork_length = ifelse(fork_length == 0, NA, fork_length)) |> 
+  select(-mark_code) |> glimpse()
+
+table(catch$mark_code)
+# Save combined data
+write_csv(catch, "data-raw/database_tables_pulled_by_flowwest/rbdd_catch_raw_combined.csv")
+```
+
+# Releases 
+```{r}
+# TODO ideally I would combine these 2 tables but no id to join on 
+# recaps metadata table 
+release_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_access_post_2012.csv")
+release_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_access_pre_2012.csv")
+
+# TODO followup on the following for release
+# TODO figure out whtat is going on with stations vs sites vs gages
+release <- bind_rows(release_pre_2012, release_post_2012) |> 
+  mutate(site = "red bluff") |> glimpse()
+
+# recaptured fish 
+release_fish_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_fishaccess_post_2012.csv")
+release_fish_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_fishaccess_pre_2012.csv")
+
+# TODO how do I link these to a release ID? Looks like release id is present in database but the mdb.get function turns them all na
+release_fish <- bind_rows(release_fish_pre_2012, release_fish_post_2012) |> 
+  mutate(site = "red bluff",
+         dead = ifelse(tolower(dead) == "yes", TRUE, FALSE))|> glimpse()
+
+write_csv(release, "data-raw/database_tables_pulled_by_flowwest/rbdd_releases_raw.csv")
+write_csv(release_fish, "data-raw/database_tables_pulled_by_flowwest/rbdd_release_fish_raw.csv")
+
+```
+
+# Recaptures 
+```{r}
+# TODO ideally I would combine these 2 tables but no id to join on 
+# recaps metadata table 
+recaps_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_access_post_2012.csv")
+recaps_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_access_pre_2012.csv")
+
+# TODO followup on the following for recaps
+# TODO figure out whtat is going on with stations vs sites 
+
+recapture <- bind_rows(recaps_pre_2012, recaps_post_2012) |> 
+  mutate(site = "red bluff",
+         gate = tolower(station_code)) |> 
+  select(-station_code) |> glimpse()
+
+# recaptured fish 
+recapture_fish_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_fishaccess_post_2012.csv")
+recapture_fish_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_fishaccess_pre_2012.csv")
+
+# TODO how do I link these to a release ID? 
+recapture_fish <- bind_rows(recapture_fish_pre_2012, recapture_fish_post_2012) |> 
+  mutate(site = "red bluff",
+         dead = ifelse(tolower(dead) == "yes", TRUE, FALSE))|> glimpse()
+
+recapture_table <- full_join(recapture, recapture_fish, 
+                             by = c("recapture_row_id" = "recap_row_id", "site" = "site")) |> glimpse()
+
+table(recapture$station_code)
+write_csv(recapture_table, "data-raw/database_tables_pulled_by_flowwest/rbdd_recaptures_raw.csv")
+
+```
