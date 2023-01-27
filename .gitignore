@@ -1,4 +1,15 @@
+.Ruserdata
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+.Renviron
+config.json
+*.xlsx
+*.csv
+*.html
+*.xls
+*.mdb
+*.DS_Store
+*.accdb
+*.laccdb
