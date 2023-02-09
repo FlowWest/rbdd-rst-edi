@@ -32,7 +32,6 @@ trap_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/trap_acce
 trap_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/trap_access_pre_2012.csv")
 
 # TODO followup on the following for trap 
-# TODO need lookup for gear condition - reach out to bill used my best guess
 # TODO figure out whtat is going on with stations vs sites 
 # TODO check on diel = do we need if we have time? What are the C or unlettered values stand for 
 # TODO how does sample weighting work - it sounds like this is all based on total hours sampled in sample period is this correct. Should catch be scaled according to this sample weight
@@ -63,8 +62,8 @@ catch_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/catch_ac
 catch_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/catch_access_pre_2012.csv")
 
 # TODO followup on the following for catch
-# TODO mark_code = Ad_pelvic - is this important? 
-# TODO confirm catch is added across traps 
+# TODO mark_code = Ad_pelvic - is this important? Signifies winter run out of Battle Creek - We would want to contain this information add additional column to do add_pelvic true or false 
+# TODO confirm catch is added across traps - trap is summed accross a trap before it is summed across traps for a certain day (wouln't want to expand some of that subsampling info across traps) - keeps info on different effort across traps 
 catch <- bind_rows(catch_pre_2012, catch_post_2012) |> 
   mutate(site = "red bluff",
          dead = ifelse(tolower(dead) == "yes", TRUE, FALSE),
@@ -85,8 +84,6 @@ write_csv(catch, "data-raw/database_tables_pulled_by_flowwest/rbdd_catch_raw_com
 
 # Releases 
 ```{r}
-# TODO ideally I would combine these 2 tables but no id to join on 
-# recaps metadata table 
 release_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_access_post_2012.csv")
 release_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_access_pre_2012.csv")
 
