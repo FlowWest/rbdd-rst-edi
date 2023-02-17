@@ -45,22 +45,25 @@ generate_tables <- function(database_path, name) {
     cleaned_catch <- catch |>
       mutate(LifeStage = as.character(LifeStage)) |>
       left_join(effort_trap) |>
+      left_join(sample) |>
       left_join(organism_lookup) |>
       left_join(lifestage_lookup, by = c("LifeStage" = "StageCode")) |>
-      select(catch_id = CatchRowID, sample_id = SampleRowID, start_date = TrapStartDate, start_time = TrapStartTime,
+      select(catch_id = CatchRowID, sample_id = SampleRowID, station_code = StationCode, start_date = TrapStartDate, start_time = TrapStartTime,
              common_name = CommonName, fork_length = ForkLength, dead = Dead, lifestage = StageName,
-             mark_code = MarkCode, weight = Weight, count = Count, run = race) |>
+             mark_code = MarkCode, weight = Weight, count = Count, run = race, count_reference = CountRef) |>
       mutate(catch_id = as.character(catch_id),
              sample_id = as.character(sample_id),
              start_date = as.Date(start_date), #TODO figure out why this isn't doing what I want
              start_time = hms::as_hms(as_datetime(start_time)),
+             station_code = as.character(station_code),
              common_name = as.character(common_name),
              fork_length = as.numeric(fork_length),
              dead = as.character(dead),
              mark_code = as.character(mark_code),
              weight = as.numeric(weight),
              count = as.numeric(count),
-             run = as.character(run)
+             run = as.character(run),
+             count_reference = as.numeric(count_reference)
              )
     # trap
    cleaned_trap <-  effort_trap |>
@@ -70,11 +73,11 @@ generate_tables <- function(database_path, name) {
       left_join(habitat_lookup, by = c("Habitat" = "value")) |>
       left_join(sample_type_lookup, by = c("TrapSampleType" = "Value")) |>
       select(sample_id = SampleRowID, start_date = TrapStartDate, start_time = TrapStartTime,
-             counter = Counter, gear_condition = GearConditionCode, trap_sample_type = Description,
+             station_code = StationCode, counter = Counter, gear_condition = GearConditionCode, trap_sample_type = Description,
              habitat = description, debris_tubs = DebrisTubs, cone = Cone, fish_properly = FishProperly,
              flow_cfs = RiverFlows, weather_code = WeatherCode, temperature = WaterTemperature,
              turbidity = Turbidity, velocity = Velocity, river_depth = RiverDepth, gear = GearID,
-             pump_flow = PumpFlow, diel = Diel, sampling_weight = SampleWeight, location_in_river = SpatialCode) |>
+             pump_flow = PumpFlow, diel = Diel, sampling_weight = SampleWeight, location_in_river = SpatialCode, volume = volume) |>
       mutate(sample_id = as.character(sample_id),
              start_date = as.Date(start_date), #TODO figure out why this isn't doing what I want
              start_time = hms::as_hms(as_datetime(start_time)),
@@ -93,7 +96,8 @@ generate_tables <- function(database_path, name) {
              pump_flow = as.numeric(pump_flow),
              diel = as.character(diel),
              sampling_weight = as.numeric(sampling_weight),
-             location_in_river = as.character(location_in_river)
+             location_in_river = as.character(location_in_river),
+             volume = as.numeric(volume)
              )
     # releases
      cleaned_releases <- release |> janitor::clean_names() |>
@@ -129,7 +133,6 @@ generate_tables <- function(database_path, name) {
                  flows = as.numeric(flows))
 
      # release fish
-     # TODO figure out how to join with relase (no trial id)
      cleaned_release_fish <- release_fish |>
        janitor::clean_names() |>
        transmute(mark_row_id = as.character(mark_row_id),
@@ -150,12 +153,12 @@ generate_tables <- function(database_path, name) {
          count = as.numeric(count),
          dead = as.character(dead))
 
-    write_csv(cleaned_catch, paste0("data-raw/qc-markdowns/rst/upper-sac/red-bluff/catch_", name, ".csv"))
-    write_csv(cleaned_trap, paste0("data-raw/qc-markdowns/rst/upper-sac/red-bluff/trap_", name, ".csv"))
-    write_csv(cleaned_releases, paste0("data-raw/qc-markdowns/rst/upper-sac/red-bluff/release_", name, ".csv"))
-    write_csv(cleaned_recapture, paste0("data-raw/qc-markdowns/rst/upper-sac/red-bluff/recapture_", name, ".csv"))
-    write_csv(cleaned_release_fish, paste0("data-raw/qc-markdowns/rst/upper-sac/red-bluff/release_fish", name, ".csv"))
-    write_csv(cleaned_recapture_fish, paste0("data-raw/qc-markdowns/rst/upper-sac/red-bluff/recapture_fish", name, ".csv"))
+    write_csv(cleaned_catch, paste0("data-raw/database_tables_pulled_by_flowwest/catch_", name, ".csv"))
+    write_csv(cleaned_trap, paste0("data-raw/database_tables_pulled_by_flowwest/trap_", name, ".csv"))
+    write_csv(cleaned_releases, paste0("data-raw/database_tables_pulled_by_flowwest/release_", name, ".csv"))
+    write_csv(cleaned_recapture, paste0("data-raw/database_tables_pulled_by_flowwest/recapture_", name, ".csv"))
+    write_csv(cleaned_release_fish, paste0("data-raw/database_tables_pulled_by_flowwest/release_fish", name, ".csv"))
+    write_csv(cleaned_recapture_fish, paste0("data-raw/database_tables_pulled_by_flowwest/recapture_fish", name, ".csv"))
 }
 
 generate_tables(database_path = access_database_pre_2012, "access_pre_2012")
