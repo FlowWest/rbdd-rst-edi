@@ -120,7 +120,8 @@ recapture_fish <- bind_rows(recapture_fish_pre_2012, recapture_fish_post_2012) |
   mutate(dead = ifelse(tolower(dead) == "yes", TRUE, FALSE))|> glimpse()
 
 recapture_table <- full_join(recapture, recapture_fish, 
-                             by = c("recapture_row_id" = "recap_row_id")) |> glimpse()
+                             by = c("recapture_row_id" = "recap_row_id")) |> 
+  select(-recapture_row_id) |> glimpse()
 
 table(recapture$station_code)
 write_csv(recapture_table, "data-raw/database_tables_pulled_by_flowwest/rbdd_recaptures_raw.csv")

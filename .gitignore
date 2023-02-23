@@ -5,7 +5,6 @@
 .Ruserdata
 .Renviron
 config.json
-*.csv
 *.html
 *.xls
 *.mdb

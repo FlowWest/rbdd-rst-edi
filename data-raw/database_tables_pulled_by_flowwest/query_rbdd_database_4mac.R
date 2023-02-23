@@ -77,7 +77,7 @@ generate_tables <- function(database_path, name) {
              habitat = description, debris_tubs = DebrisTubs, cone = Cone, fish_properly = FishProperly,
              flow_cfs = RiverFlows, weather_code = WeatherCode, temperature = WaterTemperature,
              turbidity = Turbidity, velocity = Velocity, river_depth = RiverDepth, gear = GearID,
-             pump_flow = PumpFlow, diel = Diel, sampling_weight = SampleWeight, location_in_river = SpatialCode, volume = volume) |>
+             diel = Diel, sampling_weight = SampleWeight, location_in_river = SpatialCode, volume = volume) |>
       mutate(sample_id = as.character(sample_id),
              start_date = as.Date(start_date), #TODO figure out why this isn't doing what I want
              start_time = hms::as_hms(as_datetime(start_time)),
@@ -93,7 +93,6 @@ generate_tables <- function(database_path, name) {
              velocity = as.numeric(velocity),
              river_depth = as.numeric(river_depth),
              gear = as.character(gear),
-             pump_flow = as.numeric(pump_flow),
              diel = as.character(diel),
              sampling_weight = as.numeric(sampling_weight),
              location_in_river = as.character(location_in_river),
