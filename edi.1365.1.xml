@@ -12,7 +12,7 @@
   </access>
   <dataset>
     <shortName>RBDD RST Data</shortName>
-    <title>USFWS Red Bluff Diversion Dam Rotary Screw Trap Juvenile Fish Monitoring Database</title>
+    <title>DRAFT FOR REVIEW: USFWS Red Bluff Diversion Dam Rotary Screw Trap Juvenile Fish Monitoring Database</title>
     <creator>
       <individualName>
         <givenName>Scott</givenName>
@@ -33,22 +33,15 @@
     <pubDate>2023-03-03</pubDate>
     <abstract>
       <para>
-        <emphasis>Abstract.―</emphasis>
-      </para>
-      <para> The United States Fish and Wildlife
-    Service (USFWS) has conducted direct monitoring of juvenile Chinook
-    Salmon </para>
-      <para>
-        <emphasis>Oncorhynchus tshawytscha</emphasis>
-      </para>
-      <para> passage at the
-    Red Bluff Diversion Dam (RBDD), river kilometer (RKM) 391 on the
-    Sacramento River, in Northern California since 1994 (Johnson and
-    Martin 1997). Martin et al. (2001) developed quantitative
-    methodologies for indexing juvenile Chinook passage using
-    rotary-screw traps (RST) to assess the impacts of the United States
-    Bureau of Reclamation’s (USBR) RBDD Research Pumping Plant. Absolute
-    abundance (passage and production) estimates were needed to
+    The United States Fish and Wildlife Service (USFWS) has conducted
+    direct monitoring of juvenile Chinook Salmon Oncorhynchus
+    tshawytscha passage at the Red Bluff Diversion Dam (RBDD), river
+    kilometer (RKM) 391 on the Sacramento River, in Northern California
+    since 1994 (Johnson and Martin 1997). Martin et al. (2001) developed
+    quantitative methodologies for indexing juvenile Chinook passage
+    using rotary-screw traps (RST) to assess the impacts of the United
+    States Bureau of Reclamation’s (USBR) RBDD Research Pumping Plant.
+    Absolute abundance (passage and production) estimates were needed to
     determine the level of impact from the entrainment of salmonids and
     other fish community populations through RBDD’s experimental ‘fish
     friendly’ Archimedes and internal helical pumps (Borthwick and
@@ -80,38 +73,21 @@
   </para>
       <para>
     The non-sampled period in 2020 impacted brood year (BY) 2020
-    late-fall Chinook Salmon </para>
-      <para>
-        <emphasis>Oncorhynchus
-    tshawytscha</emphasis>
-      </para>
-      <para> passage estimates and abundance indices for
-    steelhead/Rainbow Trout </para>
-      <para>
-        <emphasis>O. mykiss</emphasis>
-      </para>
-      <para> and Green
-    Sturgeon </para>
-      <para>
-        <emphasis>Acipenser medirostris</emphasis>
-      </para>
-      <para>. No
-    interpolation for missed samples was performed during this extended
-    break in sampling; therefore, these data should be viewed cautiously
-    and not used for inter-annual comparisons.
+    late-fall Chinook Salmon Oncorhynchus tshawytscha passage estimates
+    and abundance indices for steelhead/Rainbow Trout O. mykiss and
+    Green Sturgeon Acipenser medirostris. No interpolation for missed
+    samples was performed during this extended break in sampling;
+    therefore, these data should be viewed cautiously and not used for
+    inter-annual comparisons.
   </para>
       <para>
     The project estimates daily juvenile salmonid fish passage as total
     passage along with fry (&amp;lt;46 mm FL) and pre-smolt/smolt passage
-    (&amp;gt;45 mm TL) for all four runs of Chinook salmon and </para>
-      <para>
-        <emphasis>O.
-    mykiss</emphasis>
-      </para>
-      <para>. Production estimates are based on a calculated
-    fry-equivalent fish passage estimate that attempts to standardize
-    the passage of fry and pre-smolts alike for between year comparisons
-    of juvenile fish production (see methods doc for details).
+    (&amp;gt;45 mm TL) for all four runs of Chinook salmon and O. mykiss.
+    Production estimates are based on a calculated fry-equivalent fish
+    passage estimate that attempts to standardize the passage of fry and
+    pre-smolts alike for between year comparisons of juvenile fish
+    production (see methods doc for details).
   </para>
       <para>
     The project relies upon a lest-squares regression equation to model
@@ -134,23 +110,10 @@
       <para>
     Relative abundance indices are calculated each year for Green
     Sturgeon and various lamprey species including Pacific Lamprey
-    </para>
-      <para>
-        <emphasis>Entosphenus tridentata</emphasis>
-      </para>
-      <para>, Kern Brook Lamprey
-    </para>
-      <para>
-        <emphasis>Lampetra hubbsi</emphasis>
-      </para>
-      <para> and River Lamprey
-    </para>
-      <para>
-        <emphasis>Lampetra ayresi</emphasis>
-      </para>
-      <para>. In most years, the majority of
-    lamprey caught are juveniles or ammocoetes and described as lamprey
-    fry. Relative abundance methods are detailed in a separate methods
+    Entosphenus tridentata, Kern Brook Lamprey Lampetra hubbsi and River
+    Lamprey Lampetra ayresi. In most years, the majority of lamprey
+    caught are juveniles or ammocoetes and described as lamprey fry.
+    Relative abundance methods are detailed in a separate methods
     document, but relative abundance is basically calculated as catch
     per unit volume of water sampled (CPUV) and can be done for all
     species encountered per trap, summed daily and then annually for an
@@ -1850,8 +1813,8 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
       <entityDescription>Daily catch</entityDescription>
       <physical>
         <objectName>catch.csv</objectName>
-        <size unit="bytes">20</size>
-        <authentication method="MD5">6a0405c77f92538ad6b4e17cb3cc13cb</authentication>
+        <size unit="bytes">101793303</size>
+        <authentication method="MD5">5540d4529e280945f2c1eeddc61c01d1</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -1864,7 +1827,7 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
         </dataFormat>
         <distribution>
           <online>
-            <url function="download">https://raw.githubusercontent.com/FlowWest/rbdd-rst-edicatch.csv</url>
+            <url function="download"/>
           </online>
         </distribution>
       </physical>
@@ -2098,8 +2061,8 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
       <entityDescription>Daily trap operations</entityDescription>
       <physical>
         <objectName>trap.csv</objectName>
-        <size unit="bytes">20</size>
-        <authentication method="MD5">6a0405c77f92538ad6b4e17cb3cc13cb</authentication>
+        <size unit="bytes">5023580</size>
+        <authentication method="MD5">8e8580bb82bb9b178dd252f42fc90249</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -2112,7 +2075,7 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
         </dataFormat>
         <distribution>
           <online>
-            <url function="download">https://raw.githubusercontent.com/FlowWest/rbdd-rst-editrap.csv</url>
+            <url function="download"/>
           </online>
         </distribution>
       </physical>
@@ -2460,8 +2423,8 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
       <entityDescription>Recaptured catch</entityDescription>
       <physical>
         <objectName>recapture.csv</objectName>
-        <size unit="bytes">20</size>
-        <authentication method="MD5">6a0405c77f92538ad6b4e17cb3cc13cb</authentication>
+        <size unit="bytes">681348</size>
+        <authentication method="MD5">973391aece97af6a3a02c68a17e3b26f</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -2474,7 +2437,7 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
         </dataFormat>
         <distribution>
           <online>
-            <url function="download">https://raw.githubusercontent.com/FlowWest/rbdd-rst-edirecapture.csv</url>
+            <url function="download"/>
           </online>
         </distribution>
       </physical>
@@ -2636,8 +2599,8 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
       <entityDescription>Release trial</entityDescription>
       <physical>
         <objectName>release.csv</objectName>
-        <size unit="bytes">20</size>
-        <authentication method="MD5">6a0405c77f92538ad6b4e17cb3cc13cb</authentication>
+        <size unit="bytes">50701</size>
+        <authentication method="MD5">0c37610be489792b7c78ed9486d78741</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -2650,7 +2613,7 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
         </dataFormat>
         <distribution>
           <online>
-            <url function="download">https://raw.githubusercontent.com/FlowWest/rbdd-rst-edirelease.csv</url>
+            <url function="download"/>
           </online>
         </distribution>
       </physical>
@@ -2953,8 +2916,8 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
       <entityDescription>Release fish</entityDescription>
       <physical>
         <objectName>release_fish.csv</objectName>
-        <size unit="bytes">20</size>
-        <authentication method="MD5">6a0405c77f92538ad6b4e17cb3cc13cb</authentication>
+        <size unit="bytes">620789</size>
+        <authentication method="MD5">fede3183b61684cc7f0445fefea268a1</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -2967,7 +2930,7 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
         </dataFormat>
         <distribution>
           <online>
-            <url function="download">https://raw.githubusercontent.com/FlowWest/rbdd-rst-edidata/release_fish.csv</url>
+            <url function="download"/>
           </online>
         </distribution>
       </physical>
