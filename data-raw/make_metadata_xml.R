@@ -21,21 +21,21 @@ datatable_metadata <-
                                           "Release fish"),
                 datatable_url = paste0("https://raw.githubusercontent.com/FlowWest/rbdd-rst-edi",
                                        c("catch.csv",
+                                         "trap.csv",
                                          "recapture.csv",
                                          "release.csv",
-                                         "trap.csv")))
+                                         "data/release_fish.csv")))
 # save cleaned data to `data/`
-excel_path <- "data-raw/metadata/butte_metadata.xlsx"
+excel_path <- "data-raw/RBDD_RST_DRAFT_Metadata_form_022823.xlsx"
 sheets <- readxl::excel_sheets(excel_path)
 metadata <- lapply(sheets, function(x) readxl::read_excel(excel_path, sheet = x))
 names(metadata) <- sheets
 
-abstract_docx <- "data-raw/metadata/abstract.docx"
-#methods_docx <- "data-raw/metadata/methods.docx"
-methods_docx <- "data-raw/metadata/methods.md" # use md for bulleted formatting. I don't believe lists are allowed in methods (https://edirepository.org/news/news-20210430.00)
+abstract_docx <- "data-raw/RBDD_RST_Abstract_022823.docx"
+methods_docx <- "data-raw/methods_link.md"
 
-#edi_number <- reserve_edi_id(user_id = Sys.getenv("EDI_USER_ID"), password = Sys.getenv("EDI_PASSWORD"))
-edi_number <- "edi.1273.1" # reserved 12-13-2022
+# edi_number <- reserve_edi_id(user_id = Sys.getenv("user_id"), password = Sys.getenv("password"))
+edi_number <- "edi.1365.1" # reserved on March 1st, 2023
 
 dataset <- list() %>%
   add_pub_date() %>%
@@ -51,16 +51,20 @@ dataset <- list() %>%
   add_datatable(datatable_metadata)
 
 # GO through and check on all units
-custom_units <- data.frame(id = c("number of rotations", "NTU", "revolutions per minute", "number of fish", "days"),
-                           unitType = c("dimensionless", "dimensionless", "dimensionless", "dimensionless", "dimensionless"),
-                           parentSI = c(NA, NA, NA, NA, NA),
-                           multiplierToSI = c(NA, NA, NA, NA, NA),
+custom_units <- data.frame(id = c("number of rotations", "NTU", "revolutions", "number of fish", "number of traps", "tubs", "unitless", "cubicFeet"),
+                           unitType = c("dimensionless", "dimensionless", "dimensionless", "dimensionless", "dimensionless", "dimensionless", "dimensionless", "dimensionless"),
+                           parentSI = c(NA, NA, NA, NA, NA, NA, NA, NA),
+                           multiplierToSI = c(NA, NA, NA, NA, NA, NA, NA, NA),
                            description = c("number of rotations",
                                            "nephelometric turbidity units, common unit for measuring turbidity",
-                                           "number of revolutions per minute",
+                                           "number of trap revolutions per minute",
                                            "number of fish counted",
-                                           "number of days"))
-
+                                           "number of traps fishing",
+                                           "number of tubs of debris collected in trap",
+                                           "no units associated with this numeric measure",
+                                           "cubic feet of"))
+#TODO check on
+# cubic feet, cubic feet per seccond, unitless, feet, feet per second, celcius, cubic feet per second, grams
 
 unitList <- EML::set_unitList(custom_units)
 

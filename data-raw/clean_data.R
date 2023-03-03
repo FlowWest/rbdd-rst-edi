@@ -17,7 +17,8 @@ catch_cleaned <- catch_raw |> glimpse()
 write_csv(catch_cleaned, "data/catch.csv")
 
 # trap QC and processing
-trap_raw <- read_csv("data-raw/database_tables_pulled_by_flowwest/rbdd_trap_raw_combined.csv") |> glimpse()
+trap_raw <- read_csv("data-raw/database_tables_pulled_by_flowwest/rbdd_trap_raw_combined.csv") |>
+  select(-pump_flow) |> glimpse()
 
 summary(trap_raw)
 boxplot(trap_raw$river_depth)
