@@ -48,11 +48,11 @@ generate_tables <- function(database_path, name) {
       left_join(sample) |>
       left_join(organism_lookup) |>
       left_join(lifestage_lookup, by = c("LifeStage" = "StageCode")) |>
-      select(catch_id = CatchRowID, sample_id = SampleRowID, station_code = StationCode, start_date = TrapStartDate, start_time = TrapStartTime,
+      select(catch_id = CatchRowID, sample_row_id = SampleRowID, station_code = StationCode, start_date = TrapStartDate, start_time = TrapStartTime,
              common_name = CommonName, fork_length = ForkLength, dead = Dead, lifestage = StageName,
              mark_code = MarkCode, weight = Weight, count = Count, run = race, count_reference = CountRef) |>
       mutate(catch_id = as.character(catch_id),
-             sample_id = as.character(sample_id),
+             sample_row_id = as.character(sample_row_id),
              start_date = as.Date(start_date), #TODO figure out why this isn't doing what I want
              start_time = hms::as_hms(as_datetime(start_time)),
              station_code = as.character(station_code),
@@ -72,13 +72,14 @@ generate_tables <- function(database_path, name) {
              TrapSampleType = as.character(TrapSampleType)) |>
       left_join(habitat_lookup, by = c("Habitat" = "value")) |>
       left_join(sample_type_lookup, by = c("TrapSampleType" = "Value")) |>
-      select(sample_id = SampleRowID, start_date = TrapStartDate, start_time = TrapStartTime,
+      select(sample_row_id = SampleRowID, sample_id = SampleID, start_date = TrapStartDate, start_time = TrapStartTime,
              station_code = StationCode, counter = Counter, gear_condition = GearConditionCode, trap_sample_type = Description,
              habitat = description, debris_tubs = DebrisTubs, cone = Cone, fish_properly = FishProperly,
              flow_cfs = RiverFlows, weather_code = WeatherCode, temperature = WaterTemperature,
              turbidity = Turbidity, velocity = Velocity, river_depth = RiverDepth, gear = GearID,
              diel = Diel, sampling_weight = SampleWeight, location_in_river = SpatialCode, volume = volume) |>
-      mutate(sample_id = as.character(sample_id),
+      mutate(sample_row_id = as.character(sample_row_id),
+             sample_id = as.character(sample_id),
              start_date = as.Date(start_date), #TODO figure out why this isn't doing what I want
              start_time = hms::as_hms(as_datetime(start_time)),
              counter = as.numeric(counter),

@@ -14,11 +14,11 @@ datatable_metadata <-
                                    "data-raw/metadata_generated_by_flowwest/recaptures-metadata.xlsx",
                                    "data-raw/metadata_generated_by_flowwest/releases-metadata.xlsx",
                                    "data-raw/metadata_generated_by_flowwest/releases-fish-metadata.xlsx"),
-                datatable_description = c("Daily catch",
-                                          "Daily trap operations",
-                                          "Recaptured catch",
-                                          "Release trial",
-                                          "Release fish")
+                datatable_description = c("Daily catch data",
+                                          "Daily trap operations and environmental data",
+                                          "Recaptured catch from efficiency trials",
+                                          "Release trial overview data",
+                                          "Individual data on released fish")
                 # datatable_url = paste0("https://raw.githubusercontent.com/FlowWest/rbdd-rst-edi/main/data/",
                 #                        c("catch.csv",
                 #                          "trap.csv",

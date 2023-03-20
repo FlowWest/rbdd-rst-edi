@@ -12,7 +12,7 @@
   </access>
   <dataset>
     <shortName>RBDD RST Data</shortName>
-    <title>DRAFT FOR REVIEW: USFWS Red Bluff Diversion Dam Rotary Screw Trap Juvenile Fish Monitoring Database</title>
+    <title>USFWS Red Bluff Diversion Dam Rotary Screw Trap Juvenile Fish Monitoring Database</title>
     <creator>
       <individualName>
         <givenName>Scott</givenName>
@@ -30,7 +30,7 @@
       <electronicMailAddress>bill_poytress@fws.gov</electronicMailAddress>
       <role>principal investigator</role>
     </associatedParty>
-    <pubDate>2023-03-03</pubDate>
+    <pubDate>2023-03-20</pubDate>
     <abstract>
       <para>
     The United States Fish and Wildlife Service (USFWS) has conducted
@@ -129,6 +129,14 @@
     formally added to the list of federally threatened species by final
     rule on November 5, 1990 (55 FR 46515), and they were listed as a
     federally endangered species on January 4, 1994 (59 FR 440).
+  </para>
+      <para>
+    The datasets contained in this data package are raw fish count, trap
+    operations, environmental, and efficiency trial data. USFWS
+    recommends using passage estimates on SacPass -
+    https://www.cbr.washington.edu/sacramento/data/query_redbluff_graph.html.
+    Any differing passage estimates generated from the raw data within
+    this data package are not supported by USFWS.
   </para>
     </abstract>
     <keywordSet>
@@ -1783,7 +1791,7 @@
             <title>Please use the following link to access the full RBDD RST
     methods:</title>
             <para>
-      https://cvpia-data-stewardship.s3.us-west-1.amazonaws.com/rbdd-rst-data/RBDD_RST_Methods_022823.docx
+      https://cvpia-data-stewardship.s3.us-west-1.amazonaws.com/rbdd-rst-data/RBDD_RST_Methods_022823.pdf
     </para>
           </section>
         </description>
@@ -1810,11 +1818,11 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
     </project>
     <dataTable>
       <entityName>catch.csv</entityName>
-      <entityDescription>Daily catch</entityDescription>
+      <entityDescription>Daily catch data</entityDescription>
       <physical>
         <objectName>catch.csv</objectName>
-        <size unit="bytes">101793303</size>
-        <authentication method="MD5">5540d4529e280945f2c1eeddc61c01d1</authentication>
+        <size unit="bytes">101792594</size>
+        <authentication method="MD5">da2f332d21d3c8a09fe6cb4679ca52b3</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -1846,7 +1854,7 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
           </measurementScale>
         </attribute>
         <attribute>
-          <attributeName>sample_id</attributeName>
+          <attributeName>sample_row_id</attributeName>
           <attributeDefinition>unique identifier for sample - joins catch table to trap table</attributeDefinition>
           <measurementScale>
             <ordinal>
@@ -2028,19 +2036,6 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
           </measurementScale>
         </attribute>
         <attribute>
-          <attributeName>adipose_clipped</attributeName>
-          <attributeDefinition>Adipose clipped status TRUE indicates clipped adipose fin</attributeDefinition>
-          <measurementScale>
-            <nominal>
-              <nonNumericDomain>
-                <textDomain>
-                  <definition>Adipose clipped status TRUE indicates clipped adipose fin</definition>
-                </textDomain>
-              </nonNumericDomain>
-            </nominal>
-          </measurementScale>
-        </attribute>
-        <attribute>
           <attributeName>ad_pelvic</attributeName>
           <attributeDefinition>Mark used to identify  winter run out of Battle Creek TRUE indicated contains ad pelvic mark</attributeDefinition>
           <measurementScale>
@@ -2053,16 +2048,29 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
             </nominal>
           </measurementScale>
         </attribute>
+        <attribute>
+          <attributeName>adipose_clipped</attributeName>
+          <attributeDefinition>Adipose clipped status TRUE indicates clipped adipose fin, all ad_pelvic fish are also adipose_clipped</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Adipose clipped status TRUE indicates clipped adipose fin, all ad_pelvic fish are also adipose_clipped</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
       </attributeList>
       <numberOfRecords>945024</numberOfRecords>
     </dataTable>
     <dataTable>
       <entityName>trap.csv</entityName>
-      <entityDescription>Daily trap operations</entityDescription>
+      <entityDescription>Daily trap operations and environmental data</entityDescription>
       <physical>
         <objectName>trap.csv</objectName>
-        <size unit="bytes">5023580</size>
-        <authentication method="MD5">8e8580bb82bb9b178dd252f42fc90249</authentication>
+        <size unit="bytes">5248137</size>
+        <authentication method="MD5">cc189ac49124abe4af3f9a44224c127c</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -2081,13 +2089,26 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
       </physical>
       <attributeList>
         <attribute>
-          <attributeName>sample_id</attributeName>
+          <attributeName>sample_row_id</attributeName>
           <attributeDefinition>unique identifier for sample - joins catch table to trap table</attributeDefinition>
           <measurementScale>
             <ordinal>
               <nonNumericDomain>
                 <textDomain>
                   <definition>unique identifier for sample - joins catch table to trap table</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </ordinal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>sample_id</attributeName>
+          <attributeDefinition>unique identifier for trap sample table based on julian date and year. Indicates if sample was included in analysis. Samples excluded from analysis contain a .0</attributeDefinition>
+          <measurementScale>
+            <ordinal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>unique identifier for trap sample table based on julian date and year. Indicates if sample was included in analysis. Samples excluded from analysis contain a .0</definition>
                 </textDomain>
               </nonNumericDomain>
             </ordinal>
@@ -2420,7 +2441,7 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
     </dataTable>
     <dataTable>
       <entityName>recapture.csv</entityName>
-      <entityDescription>Recaptured catch</entityDescription>
+      <entityDescription>Recaptured catch from efficiency trials</entityDescription>
       <physical>
         <objectName>recapture.csv</objectName>
         <size unit="bytes">681348</size>
@@ -2596,7 +2617,7 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
     </dataTable>
     <dataTable>
       <entityName>release.csv</entityName>
-      <entityDescription>Release trial</entityDescription>
+      <entityDescription>Release trial overview data</entityDescription>
       <physical>
         <objectName>release.csv</objectName>
         <size unit="bytes">50701</size>
@@ -2913,7 +2934,7 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
     </dataTable>
     <dataTable>
       <entityName>release_fish.csv</entityName>
-      <entityDescription>Release fish</entityDescription>
+      <entityDescription>Individual data on released fish</entityDescription>
       <physical>
         <objectName>release_fish.csv</objectName>
         <size unit="bytes">620789</size>

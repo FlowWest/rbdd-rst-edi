@@ -40,7 +40,8 @@ trap_visit <- bind_rows(trap_pre_2012, trap_post_2012) |>
          gear_condition = case_when(tolower(gear_condition) == "n" ~ "normal", 
                                    tolower(gear_condition) == "pb" ~ "partial block",
                                    tolower(gear_condition) == "tb" ~ "total block",
-                                   tolower(gear_condition) %in% c("n/p", "nr") ~ "not recorded"),
+                                   tolower(gear_condition) == "nr" ~ "not rotating",
+                                   tolower(gear_condition) %in% c("n/p") ~ "not recorded"),
         river_depth = ifelse(river_depth > 9, 99, river_depth),
         station_code = tolower(station_code)) |> 
   select(-weather_code) |> glimpse()
@@ -49,6 +50,7 @@ table(trap_visit$subsite)
 table(trap_visit$trap_sample_type)
 table(trap_visit$diel)
 hist(trap_visit$river_depth)
+table(trap_visit$gear_condition)
 # Save data to google cloud
 write_csv(trap_visit, "data-raw/database_tables_pulled_by_flowwest/rbdd_trap_raw_combined.csv")
 ```
@@ -65,8 +67,10 @@ catch <- bind_rows(catch_pre_2012, catch_post_2012) |>
                          run == "S" ~ "spring run", 
                          run == "W" ~ "winter run",
                          run == "n/p" ~ "not recorded"),
-         adipose_clipped = ifelse(mark_code == "Adclipped", TRUE, FALSE),
          ad_pelvic = ifelse(mark_code == "Ad_pelvic", TRUE, FALSE),
+         adipose_clipped = case_when(mark_code == "Adclipped" ~ TRUE,
+                                     ad_pelvic ~ TRUE, 
+                                     T ~ FALSE),
          weight = ifelse(weight == 0, NA, weight),
          fork_length = ifelse(fork_length == 0, NA, fork_length),
          station_code = tolower(station_code)) |> 
