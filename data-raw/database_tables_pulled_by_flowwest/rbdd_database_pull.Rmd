@@ -28,8 +28,8 @@ knitr::opts_knit$set(root.dir)
 
 # Trap
 ```{r}
-trap_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/trap_access_post_2012.csv")
-trap_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/trap_access_pre_2012.csv")
+trap_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/trap_access_post_2012.csv") |> glimpse()
+trap_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/trap_access_pre_2012.csv") |> glimpse()
 
 trap_visit <- bind_rows(trap_pre_2012, trap_post_2012) |> 
   mutate(weather = case_when(weather_code == "CLD" ~ "cloudy", 
@@ -43,7 +43,8 @@ trap_visit <- bind_rows(trap_pre_2012, trap_post_2012) |>
                                    tolower(gear_condition) == "nr" ~ "not rotating",
                                    tolower(gear_condition) %in% c("n/p") ~ "not recorded"),
         river_depth = ifelse(river_depth > 9, 99, river_depth),
-        station_code = tolower(station_code)) |> 
+        station_code = tolower(station_code), 
+        temperature = ifelse(temperature > 1000, NA, temperature)) |> 
   select(-weather_code) |> glimpse()
 
 table(trap_visit$subsite)
@@ -51,14 +52,17 @@ table(trap_visit$trap_sample_type)
 table(trap_visit$diel)
 hist(trap_visit$river_depth)
 table(trap_visit$gear_condition)
+hist(trap_visit$temperature)
 # Save data to google cloud
 write_csv(trap_visit, "data-raw/database_tables_pulled_by_flowwest/rbdd_trap_raw_combined.csv")
 ```
 
 # Catch
 ```{r}
-catch_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/catch_access_post_2012.csv")
-catch_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/catch_access_pre_2012.csv")
+catch_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/catch_access_post_2012.csv") |> glimpse()
+catch_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/catch_access_pre_2012.csv") |> glimpse()
+summary(catch_pre_2012)
+summary(catch_post_2012)
 
 catch <- bind_rows(catch_pre_2012, catch_post_2012) |> 
   mutate(dead = ifelse(tolower(dead) == "yes", TRUE, FALSE),
@@ -83,20 +87,23 @@ write_csv(catch, "data-raw/database_tables_pulled_by_flowwest/rbdd_catch_raw_com
 
 # Releases 
 ```{r}
-release_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_access_post_2012.csv")
-release_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_access_pre_2012.csv")
+release_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_access_post_2012.csv") |> glimpse()
+# REmove pre because duplicates of post
+# release_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_access_pre_2012.csv") |> glimpse()
+summary(release_post_2012)
+# summary(release_pre_2012)
 
-
-release <- bind_rows(release_pre_2012, release_post_2012) |> 
+release <- release_post_2012 |> 
   mutate(excluded = ifelse(excluded == "N", FALSE, TRUE),
          gates = tolower(gates)) |> 
   select(-comments) |> glimpse()
 
 # recaptured fish 
-release_fish_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_fishaccess_post_2012.csv")
-release_fish_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_fishaccess_pre_2012.csv")
+release_fish_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_fishaccess_post_2012.csv") |> glimpse()
+# remove pre because duplicates of post
+# release_fish_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/release_fishaccess_pre_2012.csv") |> glimpse()
 
-release_fish <- bind_rows(release_fish_pre_2012, release_fish_post_2012) |> 
+release_fish <- release_fish_post_2012 |> 
   mutate(dead = ifelse(tolower(dead) == "yes", TRUE, FALSE),
          fish_origin = tolower(fish_origin),
          source = tolower(source))|> glimpse()
@@ -109,24 +116,27 @@ write_csv(release_fish, "data-raw/database_tables_pulled_by_flowwest/rbdd_releas
 # Recaptures 
 ```{r}
 # recaps metadata table 
-recaps_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_access_post_2012.csv")
-recaps_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_access_pre_2012.csv")
+recaps_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_access_post_2012.csv") |> glimpse()
+# All pre values appear to be duplicates
+# recaps_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_access_pre_2012.csv") |> glimpse()
 
-
-recapture <- bind_rows(recaps_pre_2012, recaps_post_2012) |> 
+recapture <- recaps_post_2012 |> 
   mutate(station_code = tolower(station_code)) |> glimpse()
 
 # recaptured fish 
-recapture_fish_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_fishaccess_post_2012.csv")
-recapture_fish_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_fishaccess_pre_2012.csv")
+recapture_fish_post_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_fishaccess_post_2012.csv") |> glimpse()
+# All pre values appear to be duplicates
+# recapture_fish_pre_2012 <- read_csv("data-raw/database_tables_pulled_by_flowwest/recapture_fishaccess_pre_2012.csv") |> glimpse()
 
-recapture_fish <- bind_rows(recapture_fish_pre_2012, recapture_fish_post_2012) |> 
+recapture_fish <- recapture_fish_post_2012 |> 
   mutate(dead = ifelse(tolower(dead) == "yes", TRUE, FALSE))|> glimpse()
 
-recapture_table <- full_join(recapture, recapture_fish, 
-                             by = c("recapture_row_id" = "recap_row_id")) |> 
-  select(-recapture_row_id) |> glimpse()
+recapture_table <- left_join(recapture_fish, recapture, 
+                             by = c("mark_recap_id" = "recapture_row_id" )) |> 
+  select(mark_recap_id, trial_id, sample_date, sample_time, station_code, flows, mark_code, fork_length, count, dead) |> 
+  glimpse()
 
+summary(recapture_table)
 table(recapture$station_code)
 write_csv(recapture_table, "data-raw/database_tables_pulled_by_flowwest/rbdd_recaptures_raw.csv")
 

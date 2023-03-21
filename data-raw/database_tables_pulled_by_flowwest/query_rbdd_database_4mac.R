@@ -11,8 +11,8 @@ access_database_pre_2012 <- (here::here("data-raw", "access_databases",
 access_database_post_2012 <- (here::here("data-raw", "access_databases",
                                          "red_bluff_database_post_2012.accdb"))
 
-database_path = access_database_pre_2012
-name = "access_pre_2012"
+# database_path = access_database_post_2012
+# name = "access_post_2012"
 generate_tables <- function(database_path, name) {
     # Catch
     # these take awhile may want to save to google cloud so we do not need to rerun every time

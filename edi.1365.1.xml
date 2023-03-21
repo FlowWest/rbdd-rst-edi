@@ -30,7 +30,7 @@
       <electronicMailAddress>bill_poytress@fws.gov</electronicMailAddress>
       <role>principal investigator</role>
     </associatedParty>
-    <pubDate>2023-03-20</pubDate>
+    <pubDate>2023-03-21</pubDate>
     <abstract>
       <para>
     The United States Fish and Wildlife Service (USFWS) has conducted
@@ -82,12 +82,12 @@
   </para>
       <para>
     The project estimates daily juvenile salmonid fish passage as total
-    passage along with fry (&amp;lt;46 mm FL) and pre-smolt/smolt passage
-    (&amp;gt;45 mm TL) for all four runs of Chinook salmon and O. mykiss.
-    Production estimates are based on a calculated fry-equivalent fish
-    passage estimate that attempts to standardize the passage of fry and
-    pre-smolts alike for between year comparisons of juvenile fish
-    production (see methods doc for details).
+    passage along with fry (less than 46 mm FL) and pre-smolt/smolt
+    passage (greater than 45 mm TL) for all four runs of Chinook salmon
+    and O. mykiss. Production estimates are based on a calculated
+    fry-equivalent fish passage estimate that attempts to standardize
+    the passage of fry and pre-smolts alike for between year comparisons
+    of juvenile fish production (see methods doc for details).
   </para>
       <para>
     The project relies upon a lest-squares regression equation to model
@@ -144,6 +144,7 @@
       <keyword>anadromous</keyword>
       <keyword>juvenile</keyword>
       <keyword>fish</keyword>
+      <keyword>chinook</keyword>
       <keyword>rotary-screw trap</keyword>
       <keyword>trout</keyword>
       <keyword>lamprey</keyword>
@@ -2069,8 +2070,8 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
       <entityDescription>Daily trap operations and environmental data</entityDescription>
       <physical>
         <objectName>trap.csv</objectName>
-        <size unit="bytes">5248137</size>
-        <authentication method="MD5">cc189ac49124abe4af3f9a44224c127c</authentication>
+        <size unit="bytes">5248135</size>
+        <authentication method="MD5">e34add43e4585f3200be9ae271708019</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -2444,8 +2445,8 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
       <entityDescription>Recaptured catch from efficiency trials</entityDescription>
       <physical>
         <objectName>recapture.csv</objectName>
-        <size unit="bytes">681348</size>
-        <authentication method="MD5">973391aece97af6a3a02c68a17e3b26f</authentication>
+        <size unit="bytes">386286</size>
+        <authentication method="MD5">4c55cc103530d66e1209e33d86a61dd9</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -2463,6 +2464,19 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
         </distribution>
       </physical>
       <attributeList>
+        <attribute>
+          <attributeName>mark_recap_id</attributeName>
+          <attributeDefinition>primary key to release table</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>primary key to release table</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
         <attribute>
           <attributeName>trial_id</attributeName>
           <attributeDefinition>unique identifier for mark recapture trial</attributeDefinition>
@@ -2538,19 +2552,6 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
           </measurementScale>
         </attribute>
         <attribute>
-          <attributeName>mark_recap_id</attributeName>
-          <attributeDefinition>primary key to release table</attributeDefinition>
-          <measurementScale>
-            <nominal>
-              <nonNumericDomain>
-                <textDomain>
-                  <definition>primary key to release table</definition>
-                </textDomain>
-              </nonNumericDomain>
-            </nominal>
-          </measurementScale>
-        </attribute>
-        <attribute>
           <attributeName>mark_code</attributeName>
           <attributeDefinition>code applied for mark recapture trial</attributeDefinition>
           <measurementScale>
@@ -2613,15 +2614,15 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
           </measurementScale>
         </attribute>
       </attributeList>
-      <numberOfRecords>10151</numberOfRecords>
+      <numberOfRecords>4358</numberOfRecords>
     </dataTable>
     <dataTable>
       <entityName>release.csv</entityName>
       <entityDescription>Release trial overview data</entityDescription>
       <physical>
         <objectName>release.csv</objectName>
-        <size unit="bytes">50701</size>
-        <authentication method="MD5">0c37610be489792b7c78ed9486d78741</authentication>
+        <size unit="bytes">26504</size>
+        <authentication method="MD5">a7b4dca6cfbb6d1692fbca087408910b</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -2930,15 +2931,15 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
           </measurementScale>
         </attribute>
       </attributeList>
-      <numberOfRecords>373</numberOfRecords>
+      <numberOfRecords>194</numberOfRecords>
     </dataTable>
     <dataTable>
       <entityName>release_fish.csv</entityName>
       <entityDescription>Individual data on released fish</entityDescription>
       <physical>
         <objectName>release_fish.csv</objectName>
-        <size unit="bytes">620789</size>
-        <authentication method="MD5">fede3183b61684cc7f0445fefea268a1</authentication>
+        <size unit="bytes">319579</size>
+        <authentication method="MD5">b67c8d3739f5b36061aeabe50dea29d3</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -3058,7 +3059,7 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
           </measurementScale>
         </attribute>
       </attributeList>
-      <numberOfRecords>6522</numberOfRecords>
+      <numberOfRecords>3355</numberOfRecords>
     </dataTable>
   </dataset>
   <additionalMetadata>
