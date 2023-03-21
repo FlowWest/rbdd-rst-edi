@@ -2445,8 +2445,8 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
       <entityDescription>Recaptured catch from efficiency trials</entityDescription>
       <physical>
         <objectName>recapture.csv</objectName>
-        <size unit="bytes">386286</size>
-        <authentication method="MD5">4c55cc103530d66e1209e33d86a61dd9</authentication>
+        <size unit="bytes">385956</size>
+        <authentication method="MD5">292fd604ae5258568cd7cbbf3fb3726d</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -2614,7 +2614,7 @@ U.S Department of the Interior, Bureau of Reclamation And U.S. Fish and Wildlife
           </measurementScale>
         </attribute>
       </attributeList>
-      <numberOfRecords>4358</numberOfRecords>
+      <numberOfRecords>4353</numberOfRecords>
     </dataTable>
     <dataTable>
       <entityName>release.csv</entityName>

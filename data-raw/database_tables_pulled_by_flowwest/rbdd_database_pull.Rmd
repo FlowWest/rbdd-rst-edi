@@ -133,7 +133,8 @@ recapture_fish <- recapture_fish_post_2012 |>
 
 recapture_table <- left_join(recapture_fish, recapture, 
                              by = c("mark_recap_id" = "recapture_row_id" )) |> 
-  select(mark_recap_id, trial_id, sample_date, sample_time, station_code, flows, mark_code, fork_length, count, dead) |> 
+  select(mark_recap_id = recap_row_id, trial_id, sample_date, sample_time, station_code, flows, mark_code, fork_length, count, dead) |> 
+  filter(!is.na(sample_date)) |> 
   glimpse()
 
 summary(recapture_table)
