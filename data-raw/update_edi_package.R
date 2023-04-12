@@ -1,7 +1,9 @@
-library(httr)
-library(tidyverse)
 library(EMLaide)
-library(lubridate)
+library(dplyr)
+library(readxl)
+library(EML)
+library(httr)
+
 # Update tables
 # Get tables from blob storage - work with Inigo on developing pipeline (for now reading in new tables)
 
