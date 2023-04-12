@@ -4,6 +4,7 @@ library(readxl)
 library(readr)
 library(EML)
 library(httr)
+library(lubridate)
 
 # Update tables
 # Get tables from blob storage - work with Inigo on developing pipeline (for now reading in new tables)
