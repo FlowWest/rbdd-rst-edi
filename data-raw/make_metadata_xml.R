@@ -1,7 +1,8 @@
 library(EMLaide)
-library(tidyverse)
+library(dplyr)
 library(readxl)
 library(EML)
+library(httr)
 
 # Pull EDI user credentials from system environment ----------------------------
 user_id <- Sys.getenv("user_id")
