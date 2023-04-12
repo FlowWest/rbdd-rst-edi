@@ -7,7 +7,7 @@ library(httr)
 library(lubridate)
 
 # Update tables
-# Get tables from blob storage - work with Inigo on developing pipeline (for now reading in new tables)
+# Get tables from blob storage - work with Inigo on developing pipeline and posting new tables in updated_tables_march
 
 updated_catch <- read_csv("data-raw/updated_tables_march/catch_update_12012022_02282023.csv") |>
   mutate(start_date = as_date(start_date, format = "%m/%d/%Y"),
