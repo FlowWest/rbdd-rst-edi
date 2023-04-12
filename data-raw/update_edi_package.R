@@ -73,9 +73,6 @@ write_csv(updated_trap, "data/trap.csv")
 # TODO need to save and push to github before running make metadata script (so it
 # can pull metadata of updated tables from github)
 
-#run make xml script
+#run make xml script & update data package
 source("data-raw/make_metadata_xml.R")
 
-# update data package api call
-# TODO figure out versioning
-EMLaide::update_edi_package_edi_package(Sys.getenv("user_id"), Sys.getenv("password"), "edi.1365.1", "edi.1365.1.xml")
