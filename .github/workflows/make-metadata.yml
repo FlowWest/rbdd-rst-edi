@@ -1,5 +1,4 @@
-
- name: 'make metadata test'
+name: 'make metadata test'
 on:
   push
     # create:

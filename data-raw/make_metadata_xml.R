@@ -23,13 +23,13 @@ datatable_metadata <-
                                           "Daily trap operations and environmental data",
                                           "Recaptured catch from efficiency trials",
                                           "Release trial overview data",
-                                          "Individual data on released fish")
-                # datatable_url = paste0("https://raw.githubusercontent.com/FlowWest/rbdd-rst-edi/main/data/",
-                #                        c("catch.csv",
-                #                          "trap.csv",
-                #                          "recapture.csv",
-                #                          "release.csv",
-                #                          "data/release_fish.csv"))
+                                          "Individual data on released fish"),
+                datatable_url = paste0("https://raw.githubusercontent.com/FlowWest/rbdd-rst-edi/main/data/",
+                                       c("catch.csv",
+                                         "trap.csv",
+                                         "recapture.csv",
+                                         "release.csv",
+                                         "data/release_fish.csv"))
                 )
 # save cleaned data to `data/`
 excel_path <- "data-raw/RBDD_RST_DRAFT_Metadata_form_022823.xlsx"
@@ -134,5 +134,5 @@ EMLaide::update_edi_package(user_id,
                             password,
                             existing_package_identifier = old_id,
                             eml_file_path = paste0(current_edi_number, ".xml"),
-                            environment = "staging")
+                            environment = "production")
 
