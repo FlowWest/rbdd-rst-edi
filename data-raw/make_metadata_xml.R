@@ -101,13 +101,12 @@ custom_units <- data.frame(id = c("number of rotations", "NTU", "revolutions", "
 
 unitList <- EML::set_unitList(custom_units)
 
-eml <- list(packageId = edi_number,
+eml <- list(packageId = current_edi_number,
             system = "EDI",
             access = add_access(),
             dataset = dataset,
             additionalMetadata = list(metadata = list(unitList = unitList))
 )
-edi_number
 
 # Write eml document using eml list --------------------------------------------
 EML::write_eml(eml, paste0(current_edi_number, ".xml"))
